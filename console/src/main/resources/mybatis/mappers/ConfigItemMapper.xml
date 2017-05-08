@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.myscloud.open.apollo.console.mapper.ConfigItemMapper">
+  <resultMap id="BaseResultMap" type="net.myscloud.open.apollo.domain.model.ConfigItem">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="project" jdbcType="VARCHAR" property="project" />
+    <result column="env" jdbcType="VARCHAR" property="env" />
+    <result column="type" jdbcType="BIT" property="type" />
+    <result column="risk_level" jdbcType="BIT" property="riskLevel" />
+    <result column="key" jdbcType="VARCHAR" property="key" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="value" jdbcType="VARCHAR" property="value" />
+    <result column="version" jdbcType="INTEGER" property="version" />
+    <result column="latest" jdbcType="BIT" property="latest" />
+    <result column="desc" jdbcType="VARCHAR" property="desc" />
+    <result column="enable" jdbcType="BIT" property="enable" />
+    <result column="creation_time" jdbcType="TIMESTAMP" property="creationTime" />
+    <result column="creator" jdbcType="INTEGER" property="creator" />
+    <result column="memo" jdbcType="VARCHAR" property="memo" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, project, env, `type`, risk_level, `key`, `name`, `value`, version, latest, `desc`, 
+    `enable`, creation_time, creator, memo
+  </sql>
+  <select id="get" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from tb_config_item
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="delete" parameterType="java.lang.Integer">
+    delete from tb_config_item
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="net.myscloud.open.apollo.domain.model.ConfigItem">
+    insert into tb_config_item (id, project, env,
+    `type`, risk_level, `key`, `name`,
+    `value`, version, latest,
+    `desc`, `enable`, creation_time,
+    creator, memo)
+    values (#{id,jdbcType=INTEGER}, #{project,jdbcType=VARCHAR}, #{env,jdbcType=VARCHAR},
+    #{type,jdbcType=BIT}, #{riskLevel,jdbcType=BIT}, #{key,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR},
+    #{value,jdbcType=VARCHAR}, #{version,jdbcType=INTEGER}, #{latest,jdbcType=BIT},
+    #{desc,jdbcType=VARCHAR}, #{enable,jdbcType=BIT}, #{creationTime,jdbcType=TIMESTAMP},
+    #{creator,jdbcType=INTEGER}, #{memo,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="net.myscloud.open.apollo.domain.model.ConfigItem">
+    insert into tb_config_item
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="project != null">
+        project,
+      </if>
+      <if test="env != null">
+        env,
+      </if>
+      <if test="type != null">
+        `type`,
+      </if>
+      <if test="riskLevel != null">
+        risk_level,
+      </if>
+      <if test="key != null">
+        `key`,
+      </if>
+      <if test="name != null">
+        `name`,
+      </if>
+      <if test="value != null">
+        `value`,
+      </if>
+      <if test="version != null">
+        version,
+      </if>
+      <if test="latest != null">
+        latest,
+      </if>
+      <if test="desc != null">
+        `desc`,
+      </if>
+      <if test="enable != null">
+        `enable`,
+      </if>
+      <if test="creationTime != null">
+        creation_time,
+      </if>
+      <if test="creator != null">
+        creator,
+      </if>
+      <if test="memo != null">
+        memo,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="project != null">
+        #{project,jdbcType=VARCHAR},
+      </if>
+      <if test="env != null">
+        #{env,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=BIT},
+      </if>
+      <if test="riskLevel != null">
+        #{riskLevel,jdbcType=BIT},
+      </if>
+      <if test="key != null">
+        #{key,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="value != null">
+        #{value,jdbcType=VARCHAR},
+      </if>
+      <if test="version != null">
+        #{version,jdbcType=INTEGER},
+      </if>
+      <if test="latest != null">
+        #{latest,jdbcType=BIT},
+      </if>
+      <if test="desc != null">
+        #{desc,jdbcType=VARCHAR},
+      </if>
+      <if test="enable != null">
+        #{enable,jdbcType=BIT},
+      </if>
+      <if test="creationTime != null">
+        #{creationTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creator != null">
+        #{creator,jdbcType=INTEGER},
+      </if>
+      <if test="memo != null">
+        #{memo,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateSelective" parameterType="net.myscloud.open.apollo.domain.model.ConfigItem">
+    update tb_config_item
+    <set>
+      <if test="project != null">
+        project = #{project,jdbcType=VARCHAR},
+      </if>
+      <if test="env != null">
+        env = #{env,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        `type` = #{type,jdbcType=BIT},
+      </if>
+      <if test="riskLevel != null">
+        risk_level = #{riskLevel,jdbcType=BIT},
+      </if>
+      <if test="key != null">
+        `key` = #{key,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        `name` = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="value != null">
+        `value` = #{value,jdbcType=VARCHAR},
+      </if>
+      <if test="version != null">
+        version = #{version,jdbcType=INTEGER},
+      </if>
+      <if test="latest != null">
+        latest = #{latest,jdbcType=BIT},
+      </if>
+      <if test="desc != null">
+        `desc` = #{desc,jdbcType=VARCHAR},
+      </if>
+      <if test="enable != null">
+        `enable` = #{enable,jdbcType=BIT},
+      </if>
+      <if test="creationTime != null">
+        creation_time = #{creationTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creator != null">
+        creator = #{creator,jdbcType=INTEGER},
+      </if>
+      <if test="memo != null">
+        memo = #{memo,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="update" parameterType="net.myscloud.open.apollo.domain.model.ConfigItem">
+    update tb_config_item
+    set project = #{project,jdbcType=VARCHAR},
+    env = #{env,jdbcType=VARCHAR},
+    `type` = #{type,jdbcType=BIT},
+    risk_level = #{riskLevel,jdbcType=BIT},
+    `key` = #{key,jdbcType=VARCHAR},
+    `name` = #{name,jdbcType=VARCHAR},
+    `value` = #{value,jdbcType=VARCHAR},
+    version = #{version,jdbcType=INTEGER},
+    latest = #{latest,jdbcType=BIT},
+    `desc` = #{desc,jdbcType=VARCHAR},
+    `enable` = #{enable,jdbcType=BIT},
+    creation_time = #{creationTime,jdbcType=TIMESTAMP},
+    creator = #{creator,jdbcType=INTEGER},
+    memo = #{memo,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <sql id="Page_Condition_SQL">
+    <where>
+      <if test="project != null">
+        and `project` like #{project}
+      </if>
+      <if test="env != null">
+        and `env` like #{env}
+      </if>
+      <if test="type != null">
+        and `type` like #{type}
+      </if>
+      <if test="key != null">
+        and locate(#{key}, `key`) > 0
+      </if>
+      <if test="name != null">
+        and locate(#{name}, `name`) > 0
+      </if>
+      <if test="latest != null">
+        and `latest` = #{latest}
+      </if>
+      <if test="enable != null">
+        and `enable` = #{enable}
+      </if>
+    </where>
+  </sql>
+
+  <select id="count" parameterType="net.myscloud.open.apollo.console.search.ConfigItemSearch" resultType="java.lang.Long">
+    select count(1)
+    from tb_config_item
+    <include refid="Page_Condition_SQL" />
+  </select>
+
+  <select id="page" parameterType="net.myscloud.open.apollo.console.search.ConfigItemSearch" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from tb_config_item
+    <include refid="Page_Condition_SQL" />
+    order by ${sort} ${order}
+    limit #{offset},#{limit};
+  </select>
+
+</mapper>

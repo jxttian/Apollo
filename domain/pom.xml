@@ -11,5 +11,10 @@
 
     <artifactId>apollo-domain</artifactId>
 
-
+    <dependencies>
+        <dependency>
+            <groupId>net.myscloud.open</groupId>
+            <artifactId>apollo-common</artifactId>
+        </dependency>
+    </dependencies>
 </project>

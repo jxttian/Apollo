@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.myscloud.open.apollo.console.mapper.SecurityMapper">
+  <resultMap id="BaseResultMap" type="net.myscloud.open.apollo.domain.model.Security">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="project" jdbcType="VARCHAR" property="project" />
+    <result column="env" jdbcType="VARCHAR" property="env" />
+    <result column="certification" jdbcType="VARCHAR" property="certification" />
+    <result column="whitelists" jdbcType="VARCHAR" property="whitelists" />
+    <result column="creation_time" jdbcType="TIMESTAMP" property="creationTime" />
+    <result column="creator" jdbcType="INTEGER" property="creator" />
+    <result column="modification_time" jdbcType="TIMESTAMP" property="modificationTime" />
+    <result column="modifier" jdbcType="INTEGER" property="modifier" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, project, env, certification, whitelists, creation_time, creator, modification_time, 
+    modifier
+  </sql>
+  <select id="get" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tb_security
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="getByProjectAndEnv" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from tb_security
+    where project = #{project} and env = #{env}
+  </select>
+  <delete id="delete" parameterType="java.lang.Integer">
+    delete from tb_security
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="net.myscloud.open.apollo.domain.model.Security">
+    insert into tb_security (id, project, env, 
+      certification, whitelists, creation_time, 
+      creator, modification_time, modifier
+      )
+    values (#{id,jdbcType=INTEGER}, #{project,jdbcType=VARCHAR}, #{env,jdbcType=VARCHAR}, 
+      #{certification,jdbcType=VARCHAR}, #{whitelists,jdbcType=VARCHAR}, #{creationTime,jdbcType=TIMESTAMP}, 
+      #{creator,jdbcType=INTEGER}, #{modificationTime,jdbcType=TIMESTAMP}, #{modifier,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="net.myscloud.open.apollo.domain.model.Security">
+    insert into tb_security
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="project != null">
+        project,
+      </if>
+      <if test="env != null">
+        env,
+      </if>
+      <if test="certification != null">
+        certification,
+      </if>
+      <if test="whitelists != null">
+        whitelists,
+      </if>
+      <if test="creationTime != null">
+        creation_time,
+      </if>
+      <if test="creator != null">
+        creator,
+      </if>
+      <if test="modificationTime != null">
+        modification_time,
+      </if>
+      <if test="modifier != null">
+        modifier,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="project != null">
+        #{project,jdbcType=VARCHAR},
+      </if>
+      <if test="env != null">
+        #{env,jdbcType=VARCHAR},
+      </if>
+      <if test="certification != null">
+        #{certification,jdbcType=VARCHAR},
+      </if>
+      <if test="whitelists != null">
+        #{whitelists,jdbcType=VARCHAR},
+      </if>
+      <if test="creationTime != null">
+        #{creationTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creator != null">
+        #{creator,jdbcType=INTEGER},
+      </if>
+      <if test="modificationTime != null">
+        #{modificationTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifier != null">
+        #{modifier,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateSelective" parameterType="net.myscloud.open.apollo.domain.model.Security">
+    update tb_security
+    <set>
+      <if test="project != null">
+        project = #{project,jdbcType=VARCHAR},
+      </if>
+      <if test="env != null">
+        env = #{env,jdbcType=VARCHAR},
+      </if>
+      <if test="certification != null">
+        certification = #{certification,jdbcType=VARCHAR},
+      </if>
+      <if test="whitelists != null">
+        whitelists = #{whitelists,jdbcType=VARCHAR},
+      </if>
+      <if test="creationTime != null">
+        creation_time = #{creationTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creator != null">
+        creator = #{creator,jdbcType=INTEGER},
+      </if>
+      <if test="modificationTime != null">
+        modification_time = #{modificationTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifier != null">
+        modifier = #{modifier,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="update" parameterType="net.myscloud.open.apollo.domain.model.Security">
+    update tb_security
+    set project = #{project,jdbcType=VARCHAR},
+      env = #{env,jdbcType=VARCHAR},
+      certification = #{certification,jdbcType=VARCHAR},
+      whitelists = #{whitelists,jdbcType=VARCHAR},
+      creation_time = #{creationTime,jdbcType=TIMESTAMP},
+      creator = #{creator,jdbcType=INTEGER},
+      modification_time = #{modificationTime,jdbcType=TIMESTAMP},
+      modifier = #{modifier,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <sql id="Page_Condition_SQL">
+    <where>
+      <if test="project != null">
+        and project like #{project}
+      </if>
+    </where>
+  </sql>
+
+  <select id="count" parameterType="net.myscloud.open.apollo.console.search.SecuritySearch" resultType="java.lang.Long">
+    select count(1)
+    from tb_security
+    <include refid="Page_Condition_SQL" />
+  </select>
+
+  <select id="page" parameterType="net.myscloud.open.apollo.console.search.SecuritySearch" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from tb_security
+    <include refid="Page_Condition_SQL" />
+    order by ${sort} ${order}
+    limit #{offset},#{limit};
+  </select>
+</mapper>

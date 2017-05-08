@@ -49,14 +49,26 @@
         <dependencies>
             <dependency>
                 <groupId>net.myscloud.open</groupId>
-                <artifactId>yuna-common</artifactId>
-                <version>1.0-SNAPSHOT</version>
+                <artifactId>apollo-common</artifactId>
+                <version>${project.version}</version>
             </dependency>
 
             <dependency>
                 <groupId>net.myscloud.open</groupId>
-                <artifactId>yuna-domain</artifactId>
-                <version>1.0-SNAPSHOT</version>
+                <artifactId>apollo-domain</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>net.myscloud.open</groupId>
+                <artifactId>apollo-client</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>net.myscloud.open</groupId>
+                <artifactId>apollo-core</artifactId>
+                <version>${project.version}</version>
             </dependency>
 
             <dependency>
@@ -156,6 +168,7 @@
                 <groupId>org.projectlombok</groupId>
                 <artifactId>lombok</artifactId>
                 <version>${lombok.version}</version>
+                <scope>compile</scope>
             </dependency>
             <dependency>
                 <groupId>org.apache.commons</groupId>

@@ -3,6 +3,7 @@ package net.myscloud.open.apollo.console.controller;
 import com.google.common.collect.Lists;
 import net.myscloud.open.apollo.common.framework.Pagination;
 import net.myscloud.open.apollo.common.framework.Response;
+import net.myscloud.open.apollo.common.framework.base.BaseModel;
 import net.myscloud.open.apollo.common.kits.StringKits;
 import net.myscloud.open.apollo.console.search.ProjectSearch;
 import net.myscloud.open.apollo.console.search.SecuritySearch;
@@ -16,6 +17,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.stream.Collectors;
 
 /**
  * Created by genesis on 17-5-4.
@@ -64,7 +67,11 @@ public class ProjectController {
     public ModelAndView security(@RequestParam String project) {
         ModelAndView modelAndView = new ModelAndView("project/security");
         modelAndView.addObject("project", project);
-        modelAndView.addObject("environments", environmentService.all().orElse(Lists.newArrayList()));
+        modelAndView.addObject("environments", environmentService.all()
+                .orElse(Lists.newArrayList())
+                .stream()
+                .filter(BaseModel::enabled)
+                .collect(Collectors.toList()));
         return modelAndView;
     }
 

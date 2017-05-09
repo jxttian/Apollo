@@ -4,6 +4,7 @@ import com.google.common.collect.Lists;
 import lombok.extern.slf4j.Slf4j;
 import net.myscloud.open.apollo.common.framework.Pagination;
 import net.myscloud.open.apollo.common.framework.Response;
+import net.myscloud.open.apollo.common.framework.base.BaseModel;
 import net.myscloud.open.apollo.console.search.ConfigFileSearch;
 import net.myscloud.open.apollo.console.service.ConfigFileService;
 import net.myscloud.open.apollo.console.service.EnvironmentService;
@@ -22,6 +23,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * Created by genesis on 17-5-4.
@@ -46,8 +48,16 @@ public class ConfigFileController {
     @RequestMapping("index.html")
     public ModelAndView index() {
         ModelAndView modelAndView = new ModelAndView("config/file");
-        modelAndView.addObject("projects", projectService.all().orElse(Lists.newArrayList()));
-        modelAndView.addObject("environments", environmentService.all().orElse(Lists.newArrayList()));
+        modelAndView.addObject("projects", projectService.all()
+                .orElse(Lists.newArrayList())
+                .stream()
+                .filter(BaseModel::enabled)
+                .collect(Collectors.toList()));
+        modelAndView.addObject("environments", environmentService.all()
+                .orElse(Lists.newArrayList())
+                .stream()
+                .filter(BaseModel::enabled)
+                .collect(Collectors.toList()));
         return modelAndView;
     }
 
@@ -76,7 +86,7 @@ public class ConfigFileController {
      * @param project 项目编码
      * @param env     环境编码
      * @param name    文件名称
-     * @param version    文件版本
+     * @param version 文件版本
      * @return 文件文本
      */
     @RequestMapping(value = "fetch/{project}/{env}/{name}", method = RequestMethod.GET)

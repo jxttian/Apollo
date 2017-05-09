@@ -38,7 +38,7 @@
                                     <select class="form-control" name="enable">
                                         <option value="">状态</option>
                                         <option value="0">不可用</option>
-                                        <option value="1">可用</option>
+                                        <option value="1" selected>可用</option>
                                     </select>
                                 </div>
                                 <div class="col-md-3">

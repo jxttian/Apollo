@@ -38,7 +38,7 @@
                                     <select class="form-control" name="enable">
                                         <option value="">状态</option>
                                         <option value="0">不可用</option>
-                                        <option value="1">可用</option>
+                                        <option value="1" selected>可用</option>
                                     </select>
                                 </div>
                                 <div class="col-md-3">
@@ -62,13 +62,7 @@
                                 <a id="create" class="btn btn-default">
                                     <i class="glyphicon glyphicon-plus"></i> 添加
                                 </a>
-                                <a id="edit" class="btn btn-default" disabled>
-                                    <i class="glyphicon glyphicon-edit"></i> 编辑
-                                </a>
                             </div>
-                            <a id="remove" class="btn btn-danger" disabled>
-                                <i class="glyphicon glyphicon-remove"></i> 删除
-                            </a>
                         </div>
                         <table id="table"
                                data-toolbar="#toolbar"

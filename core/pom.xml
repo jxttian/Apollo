@@ -11,5 +11,15 @@
 
     <artifactId>apollo-core</artifactId>
 
+    <dependencies>
+        <dependency>
+            <groupId>net.myscloud.open</groupId>
+            <artifactId>apollo-common</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.curator</groupId>
+            <artifactId>curator-recipes</artifactId>
+        </dependency>
+    </dependencies>
 
 </project>

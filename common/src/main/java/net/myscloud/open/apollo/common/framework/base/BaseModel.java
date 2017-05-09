@@ -1,14 +1,14 @@
 package net.myscloud.open.apollo.common.framework.base;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.io.Serializable;
 import java.util.Date;
 
-@Data
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
+@Getter
+@Setter
 public abstract class BaseModel implements Serializable {
     /**
      * 是否可用
@@ -39,6 +39,14 @@ public abstract class BaseModel implements Serializable {
      * 备注
      */
     private String memo;
+
+    public boolean enabled() {
+        return enable == Enable.Yes.getCode();
+    }
+
+    public boolean disabled() {
+        return !enabled();
+    }
 
     /**
      * 是否可用枚举

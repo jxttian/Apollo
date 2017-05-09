@@ -44,6 +44,8 @@
         <fastjson.version>1.2.21</fastjson.version>
         <slf4j.version>1.7.21</slf4j.version>
         <logback.version>1.2.1</logback.version>
+        <curator.version>2.12.0</curator.version>
+        <okhttp.version>3.7.0</okhttp.version>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -119,6 +121,11 @@
                 <version>${org.springframework-version}</version>
             </dependency>
             <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-beans</artifactId>
+                <version>${org.springframework-version}</version>
+            </dependency>
+            <dependency>
                 <groupId>org.aspectj</groupId>
                 <artifactId>aspectjrt</artifactId>
                 <version>${aspectj.version}</version>
@@ -184,6 +191,16 @@
                 <groupId>org.jdom</groupId>
                 <artifactId>jdom2</artifactId>
                 <version>2.0.6</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.curator</groupId>
+                <artifactId>curator-recipes</artifactId>
+                <version>${curator.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.squareup.okhttp3</groupId>
+                <artifactId>okhttp</artifactId>
+                <version>${okhttp.version}</version>
             </dependency>
 
             <!-- UI & View -->

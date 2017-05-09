@@ -36,6 +36,7 @@ var PageConst = {
                     if (data || data.env) {
                         $("#viewEnv").val($("#selectEnv").select2("val"))
                     }
+
                 },
                 yes: function () {
                     var $saveForm = $('#saveForm');
@@ -66,7 +67,6 @@ var PageConst = {
         });
     }
 };
-
 $(document).ready(function () {
     var $table = $('#table'),
         $create = $('#create'),

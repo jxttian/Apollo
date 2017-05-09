@@ -59,10 +59,6 @@
                                     </select>
                                 </div>
                                 <div class="col-md-2">
-                                    <button id="reset" type="reset" class="btn btn-default">
-                                        <i class="glyphicon glyphicon-refresh"></i> 重置
-                                    </button>
-                                    <span class="pull-right">&nbsp;</span>
                                     <button id="search" type="button" class="btn btn-primary">
                                         <i class="glyphicon glyphicon-search"></i> 搜索
                                     </button>
@@ -79,13 +75,7 @@
                                 <a id="create" class="btn btn-default">
                                     <i class="glyphicon glyphicon-plus"></i> 添加
                                 </a>
-                                <a id="edit" class="btn btn-default" disabled>
-                                    <i class="glyphicon glyphicon-edit"></i> 编辑
-                                </a>
                             </div>
-                            <a id="remove" class="btn btn-danger" disabled>
-                                <i class="glyphicon glyphicon-remove"></i> 删除
-                            </a>
                         </div>
                         <table id="table"
                                data-toolbar="#toolbar"

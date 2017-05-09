@@ -22,6 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
 import java.util.Date;
+import java.util.stream.Collectors;
 
 /**
  * Created by genesis on 17-5-4.
@@ -42,8 +43,16 @@ public class ConfigItemController {
     @RequestMapping("index.html")
     public ModelAndView index() {
         ModelAndView modelAndView = new ModelAndView("config/item");
-        modelAndView.addObject("projects", projectService.all().orElse(Lists.newArrayList()));
-        modelAndView.addObject("environments", environmentService.all().orElse(Lists.newArrayList()));
+        modelAndView.addObject("projects", projectService.all()
+                .orElse(Lists.newArrayList())
+                .stream()
+                .filter(BaseModel::enabled)
+                .collect(Collectors.toList()));
+        modelAndView.addObject("environments", environmentService.all()
+                .orElse(Lists.newArrayList())
+                .stream()
+                .filter(BaseModel::enabled)
+                .collect(Collectors.toList()));
         return modelAndView;
     }
 

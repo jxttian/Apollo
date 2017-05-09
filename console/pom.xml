@@ -25,6 +25,11 @@
 
         <dependency>
             <groupId>net.myscloud.open</groupId>
+            <artifactId>apollo-core</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>net.myscloud.open</groupId>
             <artifactId>yuna-client</artifactId>
         </dependency>
 

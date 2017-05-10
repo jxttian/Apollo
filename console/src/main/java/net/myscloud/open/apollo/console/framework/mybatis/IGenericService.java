@@ -1,7 +1,7 @@
-package net.myscloud.open.apollo.common.framework.mybatis;
+package net.myscloud.open.apollo.console.framework.mybatis;
 
 
-import net.myscloud.open.apollo.common.framework.PaginationParam;
+import net.myscloud.open.apollo.console.framework.PaginationParam;
 
 import java.io.Serializable;
 import java.util.List;

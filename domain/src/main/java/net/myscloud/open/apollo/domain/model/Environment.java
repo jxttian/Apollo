@@ -1,7 +1,7 @@
 package net.myscloud.open.apollo.domain.model;
 
 import lombok.*;
-import net.myscloud.open.apollo.common.framework.base.BaseModel;
+import net.myscloud.open.apollo.common.base.BaseModel;
 
 @Data
 @Builder

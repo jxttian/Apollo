@@ -84,9 +84,7 @@ var PageConst = {
                     var $saveForm = $('#saveForm');
                     $saveForm.validate({
                         errorClass: "has-error",
-                        rules: {
-
-                        },
+                        rules: {},
                         onkeyup: false
                     });
                     if ($saveForm.valid()) {
@@ -151,5 +149,13 @@ $(document).ready(function () {
 
     $create.click(function () {
         PageConst.Save({}, '新增');
+    });
+
+    $("#selectProject").on('change', function () {
+        $search.click();
+    });
+
+    $("#selectEnv").on('change', function () {
+        $search.click();
     });
 });

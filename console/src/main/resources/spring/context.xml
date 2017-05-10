@@ -19,5 +19,9 @@
     <aop:aspectj-autoproxy proxy-target-class="true"/>
     <bean class="org.springframework.aop.aspectj.annotation.AnnotationAwareAspectJAutoProxyCreator"/>
     <bean id="applicationContext" class="net.myscloud.open.apollo.common.kits.SpringKits"/>
+    <bean class="net.myscloud.open.apollo.core.CuratorRegister" init-method="initialize" destroy-method="destroy">
+        <property name="namespace" value="${register.namespace}"/>
+        <property name="zookeepers" value="${register.addresses}"/>
+    </bean>
     <import resource="configs/*.xml"/>
 </beans>

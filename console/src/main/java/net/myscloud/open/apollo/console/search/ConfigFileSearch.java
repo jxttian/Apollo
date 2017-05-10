@@ -1,7 +1,7 @@
 package net.myscloud.open.apollo.console.search;
 
 import lombok.*;
-import net.myscloud.open.apollo.common.framework.PaginationParam;
+import net.myscloud.open.apollo.console.framework.PaginationParam;
 
 /**
  * Created by genesis on 17-5-4.

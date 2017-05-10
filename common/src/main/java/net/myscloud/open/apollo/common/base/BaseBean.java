@@ -1,4 +1,4 @@
-package net.myscloud.open.apollo.common.framework.base;
+package net.myscloud.open.apollo.common.base;
 
 import lombok.Data;
 

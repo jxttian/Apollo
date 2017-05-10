@@ -109,4 +109,12 @@ $(document).ready(function () {
     $create.click(function () {
         PageConst.Save({}, '新增');
     });
+
+    $("#selectProject").on('change', function () {
+        $search.click();
+    });
+
+    $("#selectEnv").on('change', function () {
+        $search.click();
+    });
 });

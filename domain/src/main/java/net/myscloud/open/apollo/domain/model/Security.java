@@ -3,7 +3,7 @@ package net.myscloud.open.apollo.domain.model;
 import java.util.Date;
 
 import lombok.*;
-import net.myscloud.open.apollo.common.framework.base.BaseModel;
+import net.myscloud.open.apollo.common.base.BaseModel;
 
 @Data
 @Builder

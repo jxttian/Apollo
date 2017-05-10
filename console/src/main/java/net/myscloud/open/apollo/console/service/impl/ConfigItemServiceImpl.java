@@ -1,10 +1,12 @@
 package net.myscloud.open.apollo.console.service.impl;
 
-import net.myscloud.open.apollo.common.framework.Response;
-import net.myscloud.open.apollo.common.framework.base.BaseModel;
-import net.myscloud.open.apollo.common.framework.mybatis.AbstractGenericService;
+import lombok.extern.slf4j.Slf4j;
+import net.myscloud.open.apollo.common.Response;
+import net.myscloud.open.apollo.common.base.BaseModel;
+import net.myscloud.open.apollo.console.framework.mybatis.AbstractGenericService;
 import net.myscloud.open.apollo.console.mapper.ConfigItemMapper;
 import net.myscloud.open.apollo.console.service.ConfigItemService;
+import net.myscloud.open.apollo.core.CuratorRegister;
 import net.myscloud.open.apollo.domain.model.ConfigItem;
 import net.myscloud.open.yuna.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,11 +15,15 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 
+@Slf4j
 @Service
-public class ConfigItemServiceImpl extends AbstractGenericService<ConfigItem, Integer,ConfigItemMapper> implements ConfigItemService {
+public class ConfigItemServiceImpl extends AbstractGenericService<ConfigItem, Integer, ConfigItemMapper> implements ConfigItemService {
 
     @Autowired
     private ConfigItemMapper mapper;
+
+    @Autowired
+    private CuratorRegister curatorRegister;
 
     @Override
     protected ConfigItemMapper getMapper() {
@@ -33,7 +39,14 @@ public class ConfigItemServiceImpl extends AbstractGenericService<ConfigItem, In
             item.setLatest(1);
             item.setCreationTime(new Date());
             item.setCreator(user.getId());
-            this.insert(item);
+            if (this.insert(item) > 0) {
+                try {
+                    curatorRegister.register(String.join("/", "", item.getProject(), item.getEnv(), item.getKey()), item.getValue());
+                } catch (Exception e) {
+                    log.warn(e.getMessage(), e);
+                    return Response.error("配置中心注册节点失败");
+                }
+            }
         } else {
             ConfigItem old = new ConfigItem();
             old.setId(item.getId());
@@ -41,14 +54,22 @@ public class ConfigItemServiceImpl extends AbstractGenericService<ConfigItem, In
             old.setEnable(BaseModel.Enable.No.getCode());
             old.setModificationTime(new Date());
             old.setModifier(user.getId());
-            this.updateSelective(old).ifPresent(/*无用*/useless -> {
-                item.setId(null);
-                item.setVersion(item.getVersion() + 1);
-                item.setLatest(1);
-                item.setCreationTime(new Date());
-                item.setCreator(user.getId());
-                this.insert(item);
-            });
+            if (!this.updateSelective(old).isPresent()) {
+                return Response.error("更新数据失败");
+            }
+            item.setId(null);
+            item.setVersion(item.getVersion() + 1);
+            item.setLatest(1);
+            item.setCreationTime(new Date());
+            item.setCreator(user.getId());
+            if (this.insert(item) > 0) {
+                try {
+                    curatorRegister.update(String.join("/", "", item.getProject(), item.getEnv(), item.getKey()), item.getValue());
+                } catch (Exception e) {
+                    log.warn(e.getMessage(), e);
+                    return Response.error("配置中心更新节点失败");
+                }
+            }
         }
         return Response.success();
     }

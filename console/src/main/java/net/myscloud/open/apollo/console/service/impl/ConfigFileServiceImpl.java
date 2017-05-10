@@ -1,8 +1,8 @@
 package net.myscloud.open.apollo.console.service.impl;
 
-import net.myscloud.open.apollo.common.framework.Response;
-import net.myscloud.open.apollo.common.framework.base.BaseModel;
-import net.myscloud.open.apollo.common.framework.mybatis.AbstractGenericService;
+import net.myscloud.open.apollo.common.Response;
+import net.myscloud.open.apollo.common.base.BaseModel;
+import net.myscloud.open.apollo.console.framework.mybatis.AbstractGenericService;
 import net.myscloud.open.apollo.console.mapper.ConfigFileMapper;
 import net.myscloud.open.apollo.console.search.ConfigFileSearch;
 import net.myscloud.open.apollo.console.service.ConfigFileService;

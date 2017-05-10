@@ -42,12 +42,12 @@
         <javaClientGenerator type="XMLMAPPER" targetPackage="net.myscloud.open.apollo.console.mapper"
                              targetProject="src/main/java">
             <property name="enableSubPackages" value="true"/>
-            <property name="rootInterface" value="net.myscloud.open.apollo.common.framework.mybatis.IGenericMapper"/>
+            <property name="rootInterface" value="net.myscloud.open.apollo.console.framework.mybatis.IGenericMapper"/>
         </javaClientGenerator>
 
         <table tableName="tb_security" domainObjectName="Security" enableCountByExample="false"
                enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false">
-            <property name="rootClass" value="net.myscloud.open.apollo.common.framework.base.BaseModel"/>
+            <property name="rootClass" value="net.myscloud.open.apollo.common.base.BaseModel"/>
         </table>
     </context>
 </generatorConfiguration>

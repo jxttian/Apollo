@@ -13,6 +13,8 @@ public interface Register {
 
     void remove(String key) throws Exception;
 
+    String get(String key) throws Exception;
+
     void destroy();
 
 }

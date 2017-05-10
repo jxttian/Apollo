@@ -1,4 +1,4 @@
-package net.myscloud.open.apollo.client.spring;
+package net.myscloud.open.apollo.client.file;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
@@ -9,15 +9,14 @@ import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import net.myscloud.open.apollo.common.kits.CollectionKits;
 import net.myscloud.open.apollo.common.kits.StringKits;
+import net.myscloud.open.apollo.common.Response;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
-import okhttp3.Response;
 import org.springframework.beans.factory.config.PropertiesFactoryBean;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PropertiesLoaderUtils;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.charset.Charset;
@@ -27,7 +26,10 @@ import java.util.List;
 import java.util.Properties;
 
 /**
- * Created by genesis on 17-5-8.
+ * 允许通过HTTP从远程加载配置，并将加载的配置保持到ClassPath下
+ * 当远程服务器出现问题时，允许从本地ClassPath中加载配置文件
+ *
+ * @since 1.0
  */
 @Getter
 @Setter
@@ -92,10 +94,10 @@ public class HttpPropertiesFactoryBean extends PropertiesFactoryBean {
             String classPath = System.getProperty("os.name").toLowerCase().startsWith("win")
                     ? pathUrl.getPath().substring(1) : pathUrl.getPath();
             log.info("获取ClassPath[{}]成功", classPath);
-            try (Response response = client.newCall(request).execute()) {
+            try (okhttp3.Response response = client.newCall(request).execute()) {
                 String content = response.body().string();
                 JSONObject result = JSON.parseObject(content);
-                if (result.getInteger("code") == net.myscloud.open.apollo.common.framework.Response.Status.SUCCESS.getCode()) {
+                if (result.getInteger("code") == Response.Status.SUCCESS.getCode()) {
                     String configContent = result.getString("data");
                     log.info("加载远程配置文件成功 Content:[{}]", configContent);
                     //将配置文件保存到ClassPath

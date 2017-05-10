@@ -1,4 +1,4 @@
-package net.myscloud.open.apollo.common.framework;
+package net.myscloud.open.apollo.common;
 
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Maps;

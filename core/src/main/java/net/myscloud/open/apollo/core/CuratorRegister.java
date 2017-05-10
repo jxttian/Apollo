@@ -62,6 +62,14 @@ public class CuratorRegister implements Register {
     }
 
     @Override
+    public String get(String key) throws Exception {
+        if (client.checkExists().forPath(key) != null) {
+            new String(client.getData().forPath(key), Charset.defaultCharset());
+        }
+        return null;
+    }
+
+    @Override
     public void destroy() {
         client.close();
     }

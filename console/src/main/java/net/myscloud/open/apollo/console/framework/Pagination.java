@@ -1,4 +1,4 @@
-package net.myscloud.open.apollo.common.framework;
+package net.myscloud.open.apollo.console.framework;
 
 import com.google.common.collect.Lists;
 import lombok.AccessLevel;

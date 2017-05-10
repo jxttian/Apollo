@@ -1,8 +1,8 @@
-package net.myscloud.open.apollo.common.framework;
+package net.myscloud.open.apollo.console.framework;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import net.myscloud.open.apollo.common.framework.base.BaseBean;
+import net.myscloud.open.apollo.common.base.BaseBean;
 import net.myscloud.open.apollo.common.kits.StringKits;
 
 @Data

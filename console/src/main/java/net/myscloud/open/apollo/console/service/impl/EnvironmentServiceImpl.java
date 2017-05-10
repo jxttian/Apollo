@@ -1,6 +1,6 @@
 package net.myscloud.open.apollo.console.service.impl;
 
-import net.myscloud.open.apollo.common.framework.mybatis.AbstractGenericService;
+import net.myscloud.open.apollo.console.framework.mybatis.AbstractGenericService;
 import net.myscloud.open.apollo.console.mapper.EnvironmentMapper;
 import net.myscloud.open.apollo.console.service.EnvironmentService;
 import net.myscloud.open.apollo.domain.model.Environment;

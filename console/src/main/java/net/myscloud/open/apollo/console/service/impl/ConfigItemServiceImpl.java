@@ -1,5 +1,6 @@
 package net.myscloud.open.apollo.console.service.impl;
 
+import com.google.common.base.Joiner;
 import lombok.extern.slf4j.Slf4j;
 import net.myscloud.open.apollo.common.Response;
 import net.myscloud.open.apollo.common.base.BaseModel;
@@ -72,5 +73,15 @@ public class ConfigItemServiceImpl extends AbstractGenericService<ConfigItem, In
             }
         }
         return Response.success();
+    }
+
+    @Override
+    public Response getFromRegister(String project, String env, String key) {
+        try {
+            return Response.success(curatorRegister.get(Joiner.on("/").join("", project, env, key)));
+        } catch (Exception e) {
+            log.warn(e.getMessage(), e);
+            return Response.error(e.getMessage());
+        }
     }
 }

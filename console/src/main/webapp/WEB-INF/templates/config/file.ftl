@@ -100,8 +100,8 @@
                                 <th data-field="env" data-visible="false">环境</th>
                                 <th data-field="name">名称</th>
                                 <th data-field="desc">描述</th>
-                                <th data-field="version">版本</th>
-                                <th data-field="latest" data-formatter="Formatter.Boolean">最新</th>
+                                <th data-field="version" data-visible="false">版本</th>
+                                <th data-field="latest" data-visible="false" data-formatter="Formatter.Boolean">最新</th>
                                 <th data-field="enable" data-formatter="Formatter.Boolean">可用</th>
                             </tr>
                             </thead>

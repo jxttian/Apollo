@@ -1,8 +1,11 @@
 <#assign title = "Apollo">
 <#import "/layout.ftl" as l>
 <#macro link>
+<link href="/static/lib/bootstrap-table/extensions/reorder-rows/bootstrap-table-reorder-rows.css">
 </#macro>
 <#macro script>
+<script src="/static/lib/bootstrap-table/extensions/reorder-rows/jquery.tablednd.js"></script>
+<script src="/static/lib/bootstrap-table/extensions/reorder-rows/bootstrap-table-reorder-rows.js"></script>
 <script src="/static/app/js/config/item.js"></script>
 </#macro>
 <@detail/>
@@ -103,12 +106,14 @@
                                 <th data-field="env" data-visible="false">环境</th>
                                 <th data-field="name">名称</th>
                                 <th data-field="key">键</th>
-                                <th data-field="value">值</th>
+                                <th data-field="value" data-formatter="PageConst.ValueFormatter"
+                                    data-events="PageConst.Operates">值
+                                </th>
                                 <th data-field="type" data-formatter="PageConst.TypeFormatter">类型</th>
                                 <th data-field="riskLevel" data-formatter="PageConst.RiskLevelFormatter">风险等级</th>
                                 <th data-field="desc">描述</th>
-                                <th data-field="version">版本</th>
-                                <th data-field="latest" data-formatter="Formatter.Boolean">最新</th>
+                                <th data-field="version" data-visible="false">版本</th>
+                                <th data-field="latest" data-visible="false" data-formatter="Formatter.Boolean">最新</th>
                                 <th data-field="enable" data-formatter="Formatter.Boolean">可用</th>
                             </tr>
                             </thead>
@@ -190,6 +195,93 @@
                         <label>描述</label>
                         <input type="text" class="form-control" name="desc"
                                placeholder="描述" value="{{= d.desc}}">
+                    </div>
+                </div>
+                <br/>
+            </div>
+        </form>
+    </script>
+
+    <script id="saveValueModelTpl" type="text/html">
+        <form id="saveValueForm">
+            <div class="container-fluid">
+                <br/>
+                <div class="row">
+                    <div class="col-md-6"><label>名称</label>
+                        <input type="text" class="form-control"
+                               value="{{= d.currentRow.name}}" readonly>
+                    </div>
+                    <div class="col-md-6"><label>键</label>
+                        <input type="text" class="form-control"
+                               value="{{= d.currentRow.key}}" readonly>
+                    </div>
+                </div>
+                <br/>
+                <div class="row">
+                    <div class="col-md-12"><label>远程配置内容</label>
+                        <textarea class="form-control" rows="3" name="remoteConfigValue"
+                                  readonly>{{=d.remoteConfigValue}}</textarea>
+                    </div>
+                </div>
+                <br/>
+                <div class="row">
+                    <div class="col-md-12">
+                        <label>配置</label>
+                        {{#if(d.currentRow.type == 1){}}
+                        <textarea class="form-control" rows="3"
+                                  name="configValue">{{=d.currentRow.value}}</textarea>
+                        {{#}}}
+                        {{#if(d.currentRow.type == 2){}}
+                        <input type="number" class="form-control"
+                               name="configValue" value="{{=d.currentRow.value}}" style="width: 30%">
+                        {{#}}}
+                        {{#if(d.currentRow.type == 3){}}
+                        <select class="form-control" name="configValue" style="width: 30%">
+                            <option value="true" {{#if(d.currentRow.value==
+                            'true'){}} selected {{#}}}>true</option>
+                            <option value="false" {{#if(d.currentRow.value==
+                            'false'){}} selected {{#}}}>false</option>
+                        </select>
+                        {{#}}}
+                        {{#if(d.currentRow.type == 4){}}
+                        <div class="row">
+                            <div class="col-md-4">
+                                <input type="text" class="form-control" id="listValue" placeholder="值">
+                            </div>
+                            <div class="col-md-2">
+                                <button type="button" id="addToListBtn" class="btn btn-primary">
+                                    <i class="glyphicon glyphicon-plus"></i> 添加
+                                </button>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <table id="valuesTable">
+                                </table>
+                            </div>
+                        </div>
+                        {{#}}}
+                        {{#if(d.currentRow.type == 5){}}
+                        <div class="row">
+                            <div class="col-md-4">
+                                <input type="text" class="form-control" id="mapKey" placeholder="键">
+                            </div>
+                            <div class="col-md-4">
+                                <input type="text" class="form-control" id="mapValue" placeholder="值">
+                            </div>
+                            <div class="col-md-2">
+                                <button type="button" id="addToMapBtn" class="btn btn-primary">
+                                    <i class="glyphicon glyphicon-plus"></i> 添加
+                                </button>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <table id="valuesTable">
+                                </table>
+                            </div>
+                        </div>
+                        {{#}}}
                     </div>
                 </div>
                 <br/>

@@ -7,4 +7,6 @@ import net.myscloud.open.yuna.model.User;
 
 public interface ConfigItemService extends IGenericService<ConfigItem, Integer> {
     Response save(User user, ConfigItem item);
+
+    Response getFromRegister(String project, String env, String key);
 }

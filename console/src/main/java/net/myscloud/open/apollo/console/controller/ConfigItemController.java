@@ -13,10 +13,7 @@ import net.myscloud.open.yuna.consts.YunaConsts;
 import net.myscloud.open.yuna.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
@@ -62,6 +59,12 @@ public class ConfigItemController {
             return Pagination.build(count, service.page(search).orElse(Lists.newArrayList()));
         }
         return Pagination.empty();
+    }
+
+    @RequestMapping(value = "fetch/{project}/{env}", method = RequestMethod.GET)
+    @ResponseBody
+    public Response fetch(@PathVariable String project, @PathVariable String env, @RequestParam String key) {
+        return service.getFromRegister(project, env, key);
     }
 
     @RequestMapping(value = "save", method = RequestMethod.POST)

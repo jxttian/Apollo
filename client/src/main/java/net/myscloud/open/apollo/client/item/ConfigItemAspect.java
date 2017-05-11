@@ -9,6 +9,8 @@ import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.math.BigDecimal;
+
 /**
  * Created by jxtti on 2017/05/10.
  */
@@ -41,7 +43,7 @@ public class ConfigItemAspect {
         }
         switch (configItem.type()) {
             case Number:
-                return Long.parseLong(value);
+                return new BigDecimal(value);
             case Boolean:
                 return Boolean.valueOf(value);
             case List:

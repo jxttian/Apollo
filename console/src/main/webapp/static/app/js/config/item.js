@@ -130,7 +130,6 @@ var PageConst = {
                                 valuesTable.bootstrapTable({
                                     useRowAttrFunc: true,
                                     reorderableRows: true,
-                                    clickToSelect: true,
                                     classes: "table table-no-bordered",
                                     columns: [{
                                         field: 'checked',
@@ -142,7 +141,9 @@ var PageConst = {
                                         }
                                     }, {
                                         field: 'value',
-                                        title: '已配置的值,可拖拽排序'
+                                        title: '已配置的值,可拖拽排序',
+                                        editable: true,
+                                        editableMode: "inline"
                                     }]
                                 });
                                 try {
@@ -164,7 +165,6 @@ var PageConst = {
                             if (row.type === 5) {
                                 valuesTable.bootstrapTable({
                                     useRowAttrFunc: true,
-                                    clickToSelect: true,
                                     classes: "table table-no-bordered",
                                     columns: [{
                                         field: 'checked',
@@ -176,10 +176,14 @@ var PageConst = {
                                         }
                                     }, {
                                         field: 'key',
-                                        title: 'Key'
+                                        title: 'Key',
+                                        editable: true,
+                                        editableMode: "inline"
                                     }, {
                                         field: 'value',
-                                        title: 'Value'
+                                        title: 'Value',
+                                        editable: true,
+                                        editableMode: "inline"
                                     }]
                                 });
                                 try {

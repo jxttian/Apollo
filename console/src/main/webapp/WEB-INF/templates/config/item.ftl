@@ -2,10 +2,13 @@
 <#import "/layout.ftl" as l>
 <#macro link>
 <link href="/static/lib/bootstrap-table/extensions/reorder-rows/bootstrap-table-reorder-rows.css">
+<link href="/static/lib/bootstrap-table/extensions/editable/bootstrap-editable.css">
 </#macro>
 <#macro script>
 <script src="/static/lib/bootstrap-table/extensions/reorder-rows/jquery.tablednd.js"></script>
 <script src="/static/lib/bootstrap-table/extensions/reorder-rows/bootstrap-table-reorder-rows.js"></script>
+<script src="/static/lib/bootstrap-table/extensions/editable/bootstrap-editable.js"></script>
+<script src="/static/lib/bootstrap-table/extensions/editable/bootstrap-table-editable.min.js"></script>
 <script src="/static/app/js/config/item.js"></script>
 </#macro>
 <@detail/>
